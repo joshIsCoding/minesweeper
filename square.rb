@@ -18,8 +18,8 @@ class Square
             next if y_delta == 0 && x_delta ==0
             neighbour_pos = [@x + x_delta, @y + y_delta]
             
-            if neighbour_pos.none?{ |coord| coord < 0 || coord >= @board.length }
-               debugger
+            if neighbour_pos.none?{ |coord| coord < 0 || coord >= @board.size }
+               #debugger
                adjacent_mines += 1 if @board[neighbour_pos].mine
             end
          end

@@ -2,7 +2,9 @@ require_relative "square.rb"
 require "byebug"
 
 class Board
+   attr_reader :size
    def initialize(size)
+      @size = size
       @grid = new_grid(size)
       @mine_count = 0
    end
@@ -12,7 +14,7 @@ class Board
       new_grid.each_with_index do |grid_row, y|
          (0...size).each do |x|
             square_pos = [x, y]
-            grid_row << Square.new(square_pos, new_grid)
+            grid_row << Square.new(square_pos, self)
          end
       end
       
@@ -20,6 +22,7 @@ class Board
    end
 
    def test_adjacent_mines
+      @grid[2][3].mine = true
       @grid[3][3].adjacent_mines
    end
 
