@@ -27,6 +27,24 @@ class Square
       adjacent_mines
    end
 
+   def inspect
+      if @revealed
+         if @mine
+            return "*"
+         elsif adjacent_mines !=0
+            adjacent_mines.to_s
+         else
+            return "_"
+         end
+      elsif @flagged
+         return "F"
+      else
+         return "-"
+      end
+   end
+
+ 
+
 end
 
 

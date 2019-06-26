@@ -21,14 +21,22 @@ class Board
       new_grid
    end
 
+   
+   def [](pos)
+      col,row = pos
+      @grid[row][col]
+   end
+
+   def render
+      system("clear")
+      @grid.each{ |row_tiles| puts row_tiles.map(&:inspect).join(" ") }
+   end 
+
+   #TEST METHODS
    def test_adjacent_mines
       @grid[2][3].mine = true
       @grid[3][3].adjacent_mines
    end
 
-   def [](pos)
-      col,row = pos
-      @grid[row][col]
-   end
 end
 
