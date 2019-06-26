@@ -21,6 +21,9 @@ class Board
       new_grid
    end
 
+   def plant_mines
+   end
+
    
    def [](pos)
       col,row = pos
@@ -29,7 +32,8 @@ class Board
 
    def render
       system("clear")
-      @grid.each{ |row_tiles| puts row_tiles.map(&:inspect).join(" ") }
+      puts "  " + (0...@size).to_a.join(" ")
+      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:inspect).join(" ") }
    end 
 
    #TEST METHODS
