@@ -33,8 +33,18 @@ class Square
       adjacent_mines
    end
 
+  
+         
+
    def reveal
       @revealed = true
+      if !@mine
+         if adjacent_mines == 0
+            neighbours.each do |neighbour_square|
+               neighbour_square.reveal if !neighbour_square.mine
+            end
+         end
+      end
       @mine
    end
 

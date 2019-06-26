@@ -42,8 +42,12 @@ class Board
 
    
    def [](pos)
-      col,row = pos
-      @grid[row][col]
+      x,y = pos
+      @grid[y][x]
+   end
+
+   def reveal_square(pos)
+      self[pos].reveal
    end
 
    def render
