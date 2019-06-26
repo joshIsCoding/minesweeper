@@ -33,6 +33,16 @@ class Square
       adjacent_mines
    end
 
+   def reveal
+      @revealed = true
+      @mine
+   end
+
+   def flag
+      @flagged = true
+      @mine
+   end
+
    def to_s
       if @revealed
          if @mine
