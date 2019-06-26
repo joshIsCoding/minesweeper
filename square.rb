@@ -11,18 +11,24 @@ class Square
       @board = board
    end
 
-   def adjacent_mines
-      adjacent_mines = 0
+   def neighbours
+      neighbours = []
       (-1..1).each do |y_delta|
          (-1..1).each do |x_delta|
             next if y_delta == 0 && x_delta ==0
             neighbour_pos = [@x + x_delta, @y + y_delta]
-            
             if neighbour_pos.none?{ |coord| coord < 0 || coord >= @board.size }
-               #debugger
-               adjacent_mines += 1 if @board[neighbour_pos].mine
+               neighbours << @board[neighbour_pos]
             end
          end
+      end
+      neighbours
+   end
+
+   def adjacent_mines
+      adjacent_mines = 0
+      neighbours.each do |neighbour_square|
+         adjacent_mines += 1 if neighbour_square.mine
       end
       adjacent_mines
    end
