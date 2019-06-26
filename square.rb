@@ -27,7 +27,7 @@ class Square
       adjacent_mines
    end
 
-   def inspect
+   def to_s
       if @revealed
          if @mine
             return "*"
@@ -43,6 +43,9 @@ class Square
       end
    end
 
+   def inspect
+      { 'mine?' => @mine, 'revealed?' => @revealed, 'flagged?' => @flagged = false, 'pos' => [@x,@y] }.inspect
+   end
  
 
 end

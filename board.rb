@@ -3,10 +3,11 @@ require "byebug"
 
 class Board
    attr_reader :size
-   def initialize(size)
+   def initialize(size = 9, mine_count = 10)
       @size = size
       @grid = new_grid(size)
-      @mine_count = 0
+      @mine_count = mine_count
+      plant_mines
    end
 
    def new_grid(size)
@@ -22,6 +23,21 @@ class Board
    end
 
    def plant_mines
+      planted_mines = 0
+      while planted_mines < @mine_count
+         plant_pos = [rand(@size - 1), rand(@size-1)]
+         target_square = self[plant_pos]
+         if !target_square.mine
+            target_square.mine = true
+            #
+            target_square.revealed = true if __FILE__ != $PROGRAM_NAME
+            #
+            planted_mines += 1
+         end
+      end
+      planted_mines
+
+
    end
 
    
@@ -33,13 +49,12 @@ class Board
    def render
       system("clear")
       puts "  " + (0...@size).to_a.join(" ")
-      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:inspect).join(" ") }
+      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:to_s).join(" ") }
    end 
 
    #TEST METHODS
-   def test_adjacent_mines
-      @grid[2][3].mine = true
-      @grid[3][3].adjacent_mines
+   def test_adjacent_mines(x,y)
+      @grid[y][x].adjacent_mines
    end
 
 end
