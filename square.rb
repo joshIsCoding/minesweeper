@@ -1,7 +1,7 @@
 require_relative "board.rb"
 require "byebug"
 class Square
-   attr_accessor :mine
+   attr_accessor :mine, :revealed, :flagged
    def initialize(pos, board)
       @mine = false
       @revealed = false
