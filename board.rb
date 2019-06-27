@@ -50,6 +50,10 @@ class Board
       self[pos].reveal
    end
 
+   def flag_square(pos)
+      self[pos].flag
+   end
+
    def render
       system("clear")
       puts "  " + (0...@size).to_a.join(" ")

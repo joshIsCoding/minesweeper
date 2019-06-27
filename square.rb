@@ -1,4 +1,3 @@
-require_relative "board.rb"
 require "byebug"
 class Square
    attr_accessor :mine, :revealed, :flagged
@@ -38,7 +37,7 @@ class Square
          
 
    def reveal
-      if !@revealed
+      if !(@revealed || @flagged)
          @revealed = true
          if !@mine
             if adjacent_mines == 0
