@@ -50,12 +50,12 @@ class Square
          elsif adjacent_mines !=0
             adjacent_mines.to_s
          else
-            return "_"
+            return "-"
          end
       elsif @flagged
          return "F"
       else
-         return "-"
+         return "_"
       end
    end
 
