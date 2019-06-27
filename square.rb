@@ -17,6 +17,7 @@ class Square
          (-1..1).each do |x_delta|
             next if y_delta == 0 && x_delta ==0
             neighbour_pos = [@x + x_delta, @y + y_delta]
+            
             if neighbour_pos.none?{ |coord| coord < 0 || coord >= @board.size }
                neighbours << @board[neighbour_pos]
             end
@@ -37,15 +38,18 @@ class Square
          
 
    def reveal
-      @revealed = true
-      if !@mine
-         if adjacent_mines == 0
-            neighbours.each do |neighbour_square|
-               neighbour_square.reveal if !neighbour_square.mine
+      if !@revealed
+         @revealed = true
+         if !@mine
+            if adjacent_mines == 0
+               
+               neighbours.each do |neighbour_square|
+                  neighbour_square.reveal if !neighbour_square.mine
+               end
             end
          end
+         return @mine
       end
-      @mine
    end
 
    def flag
