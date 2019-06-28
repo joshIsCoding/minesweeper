@@ -6,6 +6,7 @@ class Board
    def initialize(size = 9, mine_count = 10)
       @size = size
       @grid = new_grid(size)
+      @revealed_squares = 0
       @mine_count = mine_count
       plant_mines
    end
@@ -47,6 +48,7 @@ class Board
    end
 
    def reveal_square(pos)
+      @revealed_squares += 1 if !self[pos].revealed      
       self[pos].reveal
    end
 
@@ -60,10 +62,6 @@ class Board
       @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:to_s).join(" ") }
    end 
 
-   #TEST METHODS
-   def test_adjacent_mines(x,y)
-      @grid[y][x].adjacent_mines
-   end
 
 end
 
