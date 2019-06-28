@@ -1,8 +1,7 @@
 require_relative "square.rb"
-require "byebug"
 
 class Board
-   attr_reader :size
+   attr_reader :size, :mine_count, :revealed_squares
    def initialize(size = 9, mine_count = 10)
       @size = size
       @grid = new_grid(size)
@@ -26,7 +25,7 @@ class Board
    def plant_mines
       planted_mines = 0
       while planted_mines < @mine_count
-         plant_pos = [rand(@size - 1), rand(@size-1)]
+         plant_pos = [rand(@size), rand(@size)]
          target_square = self[plant_pos]
          if !target_square.mine
             target_square.mine = true
@@ -48,12 +47,16 @@ class Board
    end
 
    def reveal_square(pos)
-      @revealed_squares += 1 if !self[pos].revealed      
+      @revealed_squares = revealed_squares if !self[pos].revealed      
       self[pos].reveal
    end
 
    def flag_square(pos)
       self[pos].flag
+   end
+   
+   def revealed_squares
+      @grid.flatten.count{ |square| square.revealed && !square.mine }
    end
 
    def render

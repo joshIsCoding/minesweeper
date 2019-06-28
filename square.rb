@@ -1,4 +1,3 @@
-require "byebug"
 class Square
    attr_accessor :mine, :revealed, :flagged
    def initialize(pos, board)
