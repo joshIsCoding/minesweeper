@@ -1,4 +1,3 @@
-require_relative "board.rb"
 require "byebug"
 class Square
    attr_accessor :mine, :revealed, :flagged
@@ -17,6 +16,7 @@ class Square
          (-1..1).each do |x_delta|
             next if y_delta == 0 && x_delta ==0
             neighbour_pos = [@x + x_delta, @y + y_delta]
+            
             if neighbour_pos.none?{ |coord| coord < 0 || coord >= @board.size }
                neighbours << @board[neighbour_pos]
             end
@@ -33,14 +33,30 @@ class Square
       adjacent_mines
    end
 
+  
+         
+
    def reveal
-      @revealed = true
-      @mine
+      if !(@revealed || @flagged)
+         @revealed = true
+         if !@mine
+            if adjacent_mines == 0
+               
+               neighbours.each do |neighbour_square|
+                  neighbour_square.reveal if !neighbour_square.mine
+               end
+            end
+         end
+         return @mine
+      end
    end
 
    def flag
-      @flagged = true
-      @mine
+      if @flagged
+         @flagged = false
+      else
+         @flagged = true
+      end
    end
 
    def to_s
