@@ -52,8 +52,11 @@ class Square
    end
 
    def flag
-      @flagged = true
-      @mine
+      if @flagged
+         @flagged = false
+      else
+         @flagged = true
+      end
    end
 
    def to_s
