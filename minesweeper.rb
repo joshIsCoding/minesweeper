@@ -1,6 +1,8 @@
 require_relative "board.rb"
 require "byebug"
+require "yaml"
 class Minesweeper
+   SAVE_PATH = "./save_games/save_state.txt"
    def initialize(board_size=9, difficulty="easy")
       @total_squares = board_size * board_size
       case difficulty
@@ -18,12 +20,14 @@ class Minesweeper
       until @gameover
          @board.render
          next_move
+         save_game
       end
       if game_won?
          winner 
       else
          loser
       end
+      delete_save
    end
 
    def next_move
@@ -98,7 +102,28 @@ class Minesweeper
    def game_won?
       @total_squares - @board.mine_count == @board.revealed_squares
    end
+
+   def save_game
+      save_game = File.open(SAVE_PATH, "w")
+      serialisation = self.to_yaml
+      save_game.puts serialisation
+      save_game.close
+   end
+
+   def delete_game
+      File.delete(SAVE_PATH) if File.exist?(SAVE_PATH)
+   end
+
+
+   
+   def self.load_from_save
+      recovered_save = File.read(SAVE_PATH) if File.exist?(SAVE_PATH)
+      YAML::load(recovered_save)
+   end
       
 
 
 end
+
+saved_game = Minesweeper.load_from_save
+saved_game.play
