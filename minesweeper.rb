@@ -23,9 +23,9 @@ class Minesweeper
          save_game
       end
       if game_won?
-         winner 
+         win_message 
       else
-         loser
+         lose_message
       end
       delete_save
    end
@@ -103,6 +103,16 @@ class Minesweeper
       @total_squares - @board.mine_count == @board.revealed_squares
    end
 
+   def win_message
+      puts "Nice work! You identified all of the mines."
+   end
+   
+   def lose_message
+      puts "You detonated a mine! Gameover."
+   end
+   
+
+
    def save_game
       save_game = File.open(SAVE_PATH, "w")
       serialisation = self.to_yaml
@@ -124,6 +134,3 @@ class Minesweeper
 
 
 end
-
-saved_game = Minesweeper.load_from_save
-saved_game.play
