@@ -2,7 +2,9 @@ require_relative "square.rb"
 
 class Board
    attr_reader :size, :mine_count, :revealed_squares
+   MINESWEEPER_FILE = "minesweeper.rb"
    def initialize(size = 9, mine_count = 10)
+      
       @size = size
       @grid = new_grid(size)
       @revealed_squares = 0
@@ -29,9 +31,10 @@ class Board
          target_square = self[plant_pos]
          if !target_square.mine
             target_square.mine = true
-            #
-            target_square.revealed = true if __FILE__ != $PROGRAM_NAME
-            #
+            
+            # when debugging, reveal mines by default
+            target_square.revealed = true if $PROGRAM_NAME.include?(MINESWEEPER_FILE)
+            
             planted_mines += 1
          end
       end
@@ -67,4 +70,5 @@ class Board
 
 
 end
+
 

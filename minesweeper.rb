@@ -3,6 +3,7 @@ require "byebug"
 require "yaml"
 class Minesweeper
    SAVE_PATH = "./save_games/save_state.txt"
+   
    def initialize(board_size=9, difficulty="easy")
       @total_squares = board_size * board_size
       case difficulty
@@ -120,7 +121,7 @@ class Minesweeper
       save_game.close
    end
 
-   def delete_game
+   def delete_save
       File.delete(SAVE_PATH) if File.exist?(SAVE_PATH)
    end
 
@@ -134,3 +135,6 @@ class Minesweeper
 
 
 end
+
+game = Minesweeper.new
+game.play
