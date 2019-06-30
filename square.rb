@@ -1,5 +1,20 @@
+require "colorize"
 class Square
    attr_accessor :mine, :revealed, :flagged
+   COLOURS = { 
+      mine: :black,
+      flag: :green,
+      clear: :light_black,
+      1 => :light_green
+      2 => :light_blue,
+      3 => :blue,
+      4 => :light_red,
+      5 => :red,
+      6 => :red,
+      7 => :red,
+      8 => :red
+   }
+
    def initialize(pos, board)
       @mine = false
       @revealed = false
