@@ -1,5 +1,20 @@
+require "colorize"
 class Square
    attr_accessor :mine, :revealed, :flagged
+   COLOURS = { 
+      mine: :black,
+      flag: :green,
+      clear: :light_black,
+      1 => :light_green,
+      2 => :light_blue,
+      3 => :blue,
+      4 => :light_red,
+      5 => :red,
+      6 => :red,
+      7 => :red,
+      8 => :red
+   }
+
    def initialize(pos, board)
       @mine = false
       @revealed = false
@@ -61,14 +76,15 @@ class Square
    def to_s
       if @revealed
          if @mine
-            return "*"
+            return "*".colorize(COLOURS[:mine]).on_red
          elsif adjacent_mines !=0
-            adjacent_mines.to_s
+            adj_mines = adjacent_mines
+            adj_mines.to_s.colorize(COLOURS[adj_mines])
          else
-            return "-"
+            return "-".colorize(COLOURS[:clear])
          end
       elsif @flagged
-         return "F"
+         return "F".colorize(COLOURS[:flag])
       else
          return "_"
       end
