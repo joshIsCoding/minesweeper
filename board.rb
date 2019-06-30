@@ -33,7 +33,7 @@ class Board
             target_square.mine = true
             
             # when debugging, reveal mines by default
-            target_square.revealed = true if $PROGRAM_NAME.include?(MINESWEEPER_FILE)
+            target_square.revealed = true if !$PROGRAM_NAME.include?(MINESWEEPER_FILE)
             
             planted_mines += 1
          end
