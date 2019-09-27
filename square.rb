@@ -74,19 +74,24 @@ class Square
    end
 
    def to_s
+      colour_options = {}
+      colour_options[:background] = :white if [@x, @y] == @board.cursor.cursor_pos
       if @revealed
          if @mine
             return "*".colorize(COLOURS[:mine]).on_red
          elsif adjacent_mines !=0
             adj_mines = adjacent_mines
-            adj_mines.to_s.colorize(COLOURS[adj_mines])
+            colour_options[:color] = COLOURS[adj_mines]
+            return adj_mines.to_s.colorize(colour_options)
          else
-            return "-".colorize(COLOURS[:clear])
+            colour_options[:color] = COLOURS[:clear]
+            return "-".colorize(colour_options)
          end
       elsif @flagged
-         return "F".colorize(COLOURS[:flag])
+         colour_options[:color] = COLOURS[:flag]
+         return "F".colorize(colour_options)
       else
-         return "_"
+         return "_".colorize(colour_options)
       end
    end
 
