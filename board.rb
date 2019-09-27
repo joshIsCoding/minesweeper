@@ -1,4 +1,5 @@
 require_relative "square.rb"
+require_relative "cursor.rb"
 
 class Board
    attr_reader :size, :mine_count, :revealed_squares
@@ -47,6 +48,10 @@ class Board
    def [](pos)
       x,y = pos
       @grid[y][x]
+   end
+
+   def valid_pos?(pos)
+      pos.min >= 0 && pos.max < size
    end
 
    def reveal_square(pos)
