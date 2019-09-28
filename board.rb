@@ -71,9 +71,17 @@ class Board
 
    def render
       system("clear")
-      puts "   " + (0...@size).to_a.join("  ")
-      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:to_s).join("") }
+      print_horizontal_line
+      @grid.each_with_index { |row_tiles, row_i| puts "|" + row_tiles.map(&:to_s).join("") + "|" }
+      print_horizontal_line(true) 
    end 
+
+   def print_horizontal_line(bottom = false)
+      bookend = bottom ? "|" : " "
+      print bookend
+      @size.times{ print "___"}
+      puts bookend
+   end
 
 
 end
