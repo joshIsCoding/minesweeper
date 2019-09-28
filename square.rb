@@ -82,7 +82,7 @@ class Square
          elsif adjacent_mines !=0
             adj_mines = adjacent_mines
             colour_options[:color] = COLOURS[adj_mines]
-            return adj_mines.to_s.colorize(colour_options)
+            return " " + adj_mines.to_s.colorize(colour_options) + " "
          else
             colour_options[:color] = COLOURS[:clear]
             return " - ".colorize(colour_options)
