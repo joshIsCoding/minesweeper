@@ -78,20 +78,20 @@ class Square
       colour_options[:background] = :white if [@x, @y] == @board.cursor.cursor_pos
       if @revealed
          if @mine
-            return "*".colorize(COLOURS[:mine]).on_red
+            return " * ".colorize(COLOURS[:mine]).on_red
          elsif adjacent_mines !=0
             adj_mines = adjacent_mines
             colour_options[:color] = COLOURS[adj_mines]
             return adj_mines.to_s.colorize(colour_options)
          else
             colour_options[:color] = COLOURS[:clear]
-            return "-".colorize(colour_options)
+            return " - ".colorize(colour_options)
          end
       elsif @flagged
          colour_options[:color] = COLOURS[:flag]
-         return "F".colorize(colour_options)
+         return " F ".colorize(colour_options)
       else
-         return "_".colorize(colour_options)
+         return " _ ".colorize(colour_options)
       end
    end
 

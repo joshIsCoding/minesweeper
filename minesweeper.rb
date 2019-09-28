@@ -63,7 +63,12 @@ class Minesweeper
    end
 
    def get_pos
-      parse_pos(gets.chomp)
+      pos = nil
+      until pos.is_a?(Array)
+         pos = @board.cursor.get_input
+         @board.render
+      end
+      #parse_pos(gets.chomp)
    end
 
    def get_move_type

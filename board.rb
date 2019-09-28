@@ -2,7 +2,7 @@ require_relative "square.rb"
 require_relative "cursor.rb"
 
 class Board
-   attr_reader :size, :mine_count, :revealed_squares
+   attr_reader :cursor, :size, :mine_count, :revealed_squares
    MINESWEEPER_FILE = "minesweeper.rb"
    def initialize(size = 9, mine_count = 10)
       
@@ -11,6 +11,8 @@ class Board
       @revealed_squares = 0
       @mine_count = mine_count
       plant_mines
+
+      @cursor = Cursor.new([0,0], self)
    end
 
    def new_grid(size)
@@ -47,7 +49,7 @@ class Board
    
    def [](pos)
       x,y = pos
-      @grid[y][x]
+      @grid[y][x] if valid_pos?(pos)
    end
 
    def valid_pos?(pos)
@@ -69,8 +71,8 @@ class Board
 
    def render
       system("clear")
-      puts "  " + (0...@size).to_a.join(" ")
-      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:to_s).join(" ") }
+      puts "   " + (0...@size).to_a.join("  ")
+      @grid.each_with_index { |row_tiles, row_i| puts row_i.to_s + " " + row_tiles.map(&:to_s).join("") }
    end 
 
 
