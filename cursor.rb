@@ -75,9 +75,10 @@ class Cursor
 
   def handle_key(key)
     case key
-    when :return, :space
-      @board[cursor_pos].toggle_selected
-      return @cursor_pos
+    when :return, :space, :reveal
+      return ["r", cursor_pos]
+    when :flag
+      return ["f", cursor_pos]
     when :left, :right, :up, :down
       update_pos(MOVES[key])
       nil

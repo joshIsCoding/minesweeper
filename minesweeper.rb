@@ -47,28 +47,16 @@ class Minesweeper
 
    def get_move
       request_pos
-      new_pos = get_pos
-      until valid_pos?(new_pos)
-         puts "Those ain't valid coordinates! Please try again:"
-         new_pos = get_pos
-      end
-      
-      request_move_type
-      new_move_type = get_move_type
-      until valid_move_type?(new_move_type)
-         puts "That's not a valid move! Please enter either 'f' or 'r':"
-         new_move_type = get_move_type
-      end
-      [new_move_type, new_pos]
+      get_pos
    end
 
    def get_pos
-      pos = nil
-      until pos.is_a?(Array)
-         pos = @board.cursor.get_input
+      move = nil
+      until move
+         move = @board.cursor.get_input
          @board.render
       end
-      #parse_pos(gets.chomp)
+      move
    end
 
    def get_move_type

@@ -57,7 +57,7 @@ class Board
    end
 
    def reveal_square(pos)
-      @revealed_squares = revealed_squares if !self[pos].revealed      
+      @revealed_squares = revealed_squares unless self[pos].revealed      
       self[pos].reveal
    end
 
